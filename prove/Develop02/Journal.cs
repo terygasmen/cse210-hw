@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 
 public class Journal {
+
+        public int GetEntryCount() {
+                return _entries.Count;
+        }
         public List<Entry> _entries = new List<Entry>();
 
         public void AddEntry(string prompt) {
@@ -17,6 +21,15 @@ public class Journal {
         public void DisplayJournal() {
                 foreach (Entry entry in _entries) {
                         entry.Display();
+                }
+        }
+
+        public void EditEntry(int entryIndex, string newPrompt, string newResponse) {
+                if (entryIndex >= 0 && entryIndex < _entries.Count) {
+                        _entries[entryIndex].EditEntry(newPrompt, newResponse);
+                        Console.WriteLine("Entry updated successfully.");
+                } else {
+                        Console.WriteLine("Invalid entry number.");
                 }
         }
 

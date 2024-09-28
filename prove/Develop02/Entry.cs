@@ -12,6 +12,11 @@ public class Entry
         _date = date;
     }
 
+    public void EditEntry(string newPrompt, string newResponse) {
+        _prompt = newPrompt;
+        _response = newResponse;
+    }
+
     public void Display(){
         Console.WriteLine($"Date: {_date}");
         Console.WriteLine($"Prompt: {_prompt}");

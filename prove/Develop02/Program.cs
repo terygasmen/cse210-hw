@@ -1,6 +1,24 @@
 using System;
 
 class Program {
+
+    public static void EditJournalEntry(Journal myJournal) {
+        Console.WriteLine("Journal Entries:");
+        myJournal.DisplayJournal();
+
+        Console.Write("Enter the number of the entry you want to edit: ");
+        int entryIndex;
+        if (int.TryParse(Console.ReadLine(), out entryIndex) && entryIndex >= 1 && entryIndex <= myJournal.GetEntryCount()) {
+            entryIndex -= 1;
+            Console.Write("Enter the new prompt: ");
+            string newPrompt = Console.ReadLine();
+            Console.Write("Enter the new response: ");
+            string newResponse = Console.ReadLine();
+            myJournal.EditEntry(entryIndex, newPrompt, newResponse);
+        } else {
+            Console.WriteLine("Invalid entry number.");
+        }
+    }
     static void Main(string[] args) {
         Journal myJournal = new Journal();
         Random random = new Random();
@@ -21,7 +39,8 @@ class Program {
             Console.WriteLine("2. Display the journal");
             Console.WriteLine("3. Save the journal to a file");
             Console.WriteLine("4. Load the journal from a file");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("5. Edit an entry");
+            Console.WriteLine("6. Quit");
             Console.Write("Choose an option: ");
             string choice = Console.ReadLine();
 
@@ -44,6 +63,9 @@ class Program {
                     myJournal.LoadJournal(loadFilename);
                     break;
                 case "5":
+                    EditJournalEntry(myJournal);
+                    break;
+                case "6":
                     running = false;
                     Console.WriteLine("Goodbye!");
                     break;
