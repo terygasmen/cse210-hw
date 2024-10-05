@@ -18,22 +18,31 @@ public class Scripture {
                 Random random = new Random();
                 int hiddenCount = 0;
 
-                while (hiddenCount < numberToHide) {
-                        int index = random.Next(words.Count);
-
-                        if (!words[index].IsHidden()) {
-                                words[index].Hide();
-                                hiddenCount++;
+                List<int> visibleWordIndices = new List<int>();
+                for (int i = 0; i < words.Count; i++) {
+                        if (!words[i].IsHidden()) {
+                                visibleWordIndices.Add(i);
                         }
+                }
+
+                int wordsToHide = Math.Min(numberToHide, visibleWordIndices.Count);
+
+                while (hiddenCount < wordsToHide) {
+                        int randomIndex = random.Next(visibleWordIndices.Count);
+
+                        int wordIndex = visibleWordIndices[randomIndex];
+                        words[wordIndex].Hide();
+
+                        visibleWordIndices.RemoveAt(randomIndex);
+
+                        hiddenCount++;
                 }
         }
         public string GetDisplayText() {
                 string displayText = reference.GetDisplayText() + "\n";
-
                 foreach (Word word in words) {
                         displayText += word.GetDisplayText() + " ";
                 }
-
                 return displayText.Trim();
         }
         public bool IsCompletelyHidden() {
@@ -44,4 +53,4 @@ public class Scripture {
                 }
                 return true;
         }
-}
+}                
