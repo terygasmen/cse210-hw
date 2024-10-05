@@ -3,18 +3,23 @@ public class Word {
         private bool isHidden;
 
         public Word(string text) {
-
+                this.text = text;
+                isHidden = false;
         }
         public void Hide(){
-
+                isHidden = true;
         }
         public void Show(){
-
+                isHidden = false;
         }
         public bool IsHidden() {
-                return false;
+                return isHidden;
         }
         public string GetDisplayText() {
-                return "";
+                if (isHidden) {
+                        return new string('_', text.Length);
+                } else {
+                        return text;
+                }
         }
 }
