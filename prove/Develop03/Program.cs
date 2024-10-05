@@ -1,3 +1,5 @@
+// Stretch: Added a choice for users to get a hint when memorizing
+
 using System;
 
 public class Program
@@ -5,26 +7,25 @@ public class Program
     public static void Main(string[] args){
         Reference reference = new Reference("John", 3, 16);
         Scripture scripture = new Scripture("For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", reference);
-        
-        while (true) {
+
+        while (!scripture.IsCompletelyHidden()) {
             Console.Clear();
             Console.WriteLine(scripture.GetDisplayText());
 
-            if (scripture.IsCompletelyHidden()) {
-                Console.WriteLine("All words are hidden! Program will now end.");
+            Console.WriteLine("\nPress 'Enter' to hide more words, 'H' for a hint, or 'Q' to quit:");
+            string input = Console.ReadLine().ToLower();
+
+            if (input == "q") {
                 break;
+            } else if (input == "h") {
+                scripture.RevealRandomHiddenWord();
+                Console.WriteLine("Hint used! One hidden word has been revealed.");
+            } else {
+                scripture.HideRandomWords(3);
             }
-
-            Console.WriteLine("Press Enter to hide more words or type 'quit' to exit.");
-            string userInput = Console.ReadLine();
-
-            if (userInput.ToLower() == "quit") {
-                break;
-            }
-
-            scripture.HideRandomWords(3);
         }
 
-        Console.WriteLine("Thank you for using the Scripture Memorization Program.");
+        Console.Clear();
+        Console.WriteLine("All words are hidden! Scripture memorization complete.");
     }
 }

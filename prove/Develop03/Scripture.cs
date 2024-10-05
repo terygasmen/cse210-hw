@@ -53,4 +53,21 @@ public class Scripture {
                 }
                 return true;
         }
+
+        public void RevealRandomHiddenWord() {
+                Random random = new Random();
+
+                List<int> hiddenWordIndices = new List<int>();
+                for (int i = 0; i < words.Count; i++) {
+                        if (words[i].IsHidden()) {
+                                hiddenWordIndices.Add(i);
+                        }
+                }
+
+                if (hiddenWordIndices.Count > 0) {
+                        int randomIndex = random.Next(hiddenWordIndices.Count);
+                        int wordIndex = hiddenWordIndices[randomIndex];
+                        words[wordIndex].Show();
+                }
+        }
 }                
