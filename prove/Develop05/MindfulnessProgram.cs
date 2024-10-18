@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 public class MindfulnessProgram {
         protected string _activityName;
@@ -15,11 +14,11 @@ public class MindfulnessProgram {
 
         }
 
-        public VersionConverter ShowSpinner(int seconds) {
+        public void ShowSpinner(int seconds) {
 
         }
 
-        public VersionConverter ShowCountDown(int seconds) {
+        public void ShowCountDown(int seconds) {
 
         }
 
