@@ -1,7 +1,6 @@
 using System;
 
-class Program
-{
+class Program {
         static void Main(string[] args)
         {
                 while (true) {
@@ -10,7 +9,8 @@ class Program
                         Console.WriteLine("1. Breathing Activity");
                         Console.WriteLine("2. Reflection Activity");
                         Console.WriteLine("3. Listing Activity");
-                        Console.WriteLine("4. Quit");
+                        Console.WriteLine("4. View Activity Log");
+                        Console.WriteLine("5. Quit");
 
                         string choice = Console.ReadLine(); 
 
@@ -26,7 +26,10 @@ class Program
                                         activity = new ListingActivity();
                                         break;
                                 case "4":
-                                        return;
+                                        MindfulnessProgram.DisplayActivityLog();
+                                        Console.WriteLine("Press any key to return to the main menu...");
+                                        Console.ReadKey();
+                                        continue;
                                 default:
                                         Console.WriteLine("Invalid choice. Try again.");
                                         continue;
